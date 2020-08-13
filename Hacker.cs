@@ -28,18 +28,27 @@ public class Hacker : MonoBehaviour
         Terminal.WriteLine("Enter your selection: ");
     }
 
+    // this only decides who to handle input, not actually do it
     void OnUserInput(string input)
     {
         if(input == "menu")
         {
             ShowMainMenu();
-        } // TODO handle differently depending on screen
-        else if(input == "1")
+        }
+        else if(currentScreen == Screen.MainMenu)
+        {
+            RunMainMenu(input);
+        }
+    }
+
+    void RunMainMenu(string input)
+    {
+        if (input == "1")
         {
             level = 1;
             StartGame();
         }
-        else if(input == "411")
+        else if (input == "411")
         {
             Terminal.WriteLine("What's the Disney 411?");
         }
