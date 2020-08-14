@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Reflection.Emit;
 using System.Runtime.InteropServices;
 using UnityEngine;
@@ -22,8 +23,7 @@ public class Hacker : MonoBehaviour
     string password;
     string guess;
 
-    public string Password { get => Password1; set => Password1 = value; }
-    public string Password1 { get => password; set => password = value; }
+    public string Password { get => password; set => password = value; }
 
 
     // Start is called before the first frame update
@@ -62,20 +62,13 @@ public class Hacker : MonoBehaviour
 
     void RunMainMenu(string input)
     {
-        if(input == "1")
+        bool isValidLevelNum = (input == "1" || input == "2");
+        if (isValidLevelNum)
         {
-            level = 1;
-            Password = lvl1Passwords[0]; // TODO make random password later
+            level = int.Parse(input); // Change string into integer
             StartGame();
         }
-        else if(input == "2")
-        {
-            level = 2;
-            Password = lvl2Passwords[1]; // TODO make random later
-            StartGame();
-        }
-            
-        else if(input == "411")
+        else if (input == "411")
         {
             Terminal.WriteLine("What's the Disney 411?");
         }
@@ -88,6 +81,19 @@ public class Hacker : MonoBehaviour
     void StartGame()
     {
         currentScreen = Screen.Password;
+        Terminal.ClearScreen();
+        switch (level)
+        {
+            case 1:
+                Password = lvl1Passwords[0]; // TODO make random password later
+                break;
+            case 2:
+                Password = lvl2Passwords[0]; // TODO make random password later
+                break;
+            default:
+                Terminal.WriteLine("I don't know you!");
+                break;
+        }
         Terminal.WriteLine("You have chosen level " + level);
         Terminal.WriteLine("Enter your password: ");
 
