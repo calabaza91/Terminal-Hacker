@@ -1,9 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Reflection.Emit;
-using System.Runtime.InteropServices;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Hacker : MonoBehaviour
 {
@@ -32,6 +27,14 @@ public class Hacker : MonoBehaviour
         ShowMainMenu();
     }
 
+    //Use Update to check is Random.Range is working
+    /*
+    void Update()
+    {
+        int index = Random.Range(0, lvl1Passwords.Length);
+        print(index);
+    }
+    */
     void ShowMainMenu()
     {
         currentScreen = Screen.MainMenu;
@@ -85,13 +88,13 @@ public class Hacker : MonoBehaviour
         switch (level)
         {
             case 1:
-                Password = lvl1Passwords[0]; // TODO make random password later
+                Password = lvl1Passwords[Random.Range(0, lvl1Passwords.Length); // TODO make random password later
                 break;
             case 2:
-                Password = lvl2Passwords[0]; // TODO make random password later
+                Password = lvl2Passwords[Random.Range(0, lvl2Passwords.Length); // TODO make random password later
                 break;
             default:
-                Terminal.WriteLine("I don't know you!");
+                Debug.LogError("I don't know you!");
                 break;
         }
         Terminal.WriteLine("You have chosen level " + level);
@@ -103,15 +106,32 @@ public class Hacker : MonoBehaviour
     void CheckPassword(string input)
     {
             if (input == Password)
-            {
-                Terminal.WriteLine("Good job!");
-                Terminal.WriteLine("Type 'menu' to choose a new level.");
-            }
-            else
+        {
+            DisplayWinScreen();
+            Terminal.WriteLine("Type 'menu' to choose a new level.");
+        }
+        else
             {
                 Terminal.WriteLine("Incorrect. Guess again, human.");
 
             }
     }
-    
+
+    void DisplayWinScreen()
+    {
+        currentScreen = Screen.Win;
+        Terminal.ClearScreen();
+        ShowLevelReward();
+    }
+
+    void ShowLevelReward()
+    {
+        switch (level)
+        {
+            case 1:
+                Terminal.WriteLine("Have a book...");
+                break;
+        }
+        
+    }
 }
