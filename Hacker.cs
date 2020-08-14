@@ -4,6 +4,7 @@ public class Hacker : MonoBehaviour
 {
 
     // Game configuration data
+    const string menuHint = "Type 'menu' to choose a new level.";
     string[] lvl1Passwords = { "book", "badge", "biology", "dubious", "mononucleosis" };
     string[] lvl2Passwords = { "hygge", "jazz", "chicago", "mousekateer", "fortnight" };
 
@@ -69,22 +70,31 @@ public class Hacker : MonoBehaviour
         if (isValidLevelNum)
         {
             level = int.Parse(input); // Change string into integer
-            StartGame();
+            AskForPassword();
         }
         else if (input == "411")
         {
-            Terminal.WriteLine("What's the Disney 411?");
+            Terminal.WriteLine("What's the Disney 411?");  // Easter egg
         }
         else
         {
             Terminal.WriteLine("Please enter a valid level");
+            Terminal.WriteLine(menuHint);
         }
     }
 
-    void StartGame()
+    void AskForPassword()
     {
         currentScreen = Screen.Password;
         Terminal.ClearScreen();
+        SetRandomPassword();
+        Terminal.WriteLine("Enter your password, hint: " + password.Anagram());
+        Terminal.WriteLine(menuHint);
+
+    }
+
+    void SetRandomPassword()
+    {
         switch (level)
         {
             case 1:
@@ -97,10 +107,6 @@ public class Hacker : MonoBehaviour
                 Debug.LogError("I don't know you!");
                 break;
         }
-        Terminal.WriteLine("You have chosen level " + level);
-        Terminal.WriteLine("Enter your password: ");
-
-       
     }
 
     void CheckPassword(string input)
@@ -108,11 +114,11 @@ public class Hacker : MonoBehaviour
             if (input == Password)
         {
             DisplayWinScreen();
-            Terminal.WriteLine("Type 'menu' to choose a new level.");
+            Terminal.WriteLine(menuHint);
         }
         else
             {
-                Terminal.WriteLine("Incorrect. Guess again, human.");
+            AskForPassword();
 
             }
     }
