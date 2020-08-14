@@ -7,16 +7,23 @@ using UnityEngine;
 public class Hacker : MonoBehaviour
 {
 
-    // Game State
-    int level;
-    string[] passwords = {"book", "badge", "biology", "dubious", "mononucleosis"};
+    // Game configuration data
+    string[] lvl1Passwords = { "book", "badge", "biology", "dubious", "mononucleosis" };
+    string[] lvl2Passwords = { "hygge", "jazz", "chicago", "mousekateer", "fortnight" };
+
     // TODO add for helping human succeed
     string[] hint1;
     string[] hint2;
+
+    // Game State
+    int level;
     enum Screen {MainMenu, Password, Win}; //enum is a list type that is used to control the game state
     Screen currentScreen;
     string password;
     string guess;
+
+    public string Password { get => Password1; set => Password1 = value; }
+    public string Password1 { get => password; set => password = value; }
 
 
     // Start is called before the first frame update
@@ -58,13 +65,13 @@ public class Hacker : MonoBehaviour
         if(input == "1")
         {
             level = 1;
-            password = passwords[0];
+            Password = lvl1Passwords[0]; // TODO make random password later
             StartGame();
         }
         else if(input == "2")
         {
             level = 2;
-            password = passwords[1];
+            Password = lvl2Passwords[1]; // TODO make random later
             StartGame();
         }
             
@@ -89,7 +96,7 @@ public class Hacker : MonoBehaviour
 
     void CheckPassword(string input)
     {
-            if (input == password)
+            if (input == Password)
             {
                 Terminal.WriteLine("Good job!");
                 Terminal.WriteLine("Type 'menu' to choose a new level.");
