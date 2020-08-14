@@ -5,8 +5,9 @@ public class Hacker : MonoBehaviour
 
     // Game configuration data
     const string menuHint = "Type 'menu' to choose a new level.";
-    string[] lvl1Passwords = { "book", "badge", "biology", "dubious", "mononucleosis" };
-    string[] lvl2Passwords = { "hygge", "jazz", "chicago", "mousekateer", "fortnight" };
+    string[] lvl1Passwords = { "book", "librarian", "biology", "selfhelp", "literature" };
+    string[] lvl2Passwords = { "shakespeare", "jazz", "chicago", "monologue", "technique" };
+    string[] lvl3Passwords = { "disney", "mousekateer", "starwars", "master", "hivemind" };
 
     // TODO add for helping human succeed
     string[] hint1;
@@ -43,7 +44,8 @@ public class Hacker : MonoBehaviour
         Terminal.WriteLine("Hello, Human.");
         Terminal.WriteLine("What would you like to hack with me?");
         Terminal.WriteLine("Press 1 for the local library");
-        Terminal.WriteLine("Press 2 for the police station");
+        Terminal.WriteLine("Press 2 for the theatre");
+        Terminal.WriteLine("Press 3 for Disney World");
         Terminal.WriteLine("Enter your selection: ");
     }
 
@@ -66,7 +68,7 @@ public class Hacker : MonoBehaviour
 
     void RunMainMenu(string input)
     {
-        bool isValidLevelNum = (input == "1" || input == "2");
+        bool isValidLevelNum = (input == "1" || input == "2" || input == "3");
         if (isValidLevelNum)
         {
             level = int.Parse(input); // Change string into integer
@@ -98,10 +100,13 @@ public class Hacker : MonoBehaviour
         switch (level)
         {
             case 1:
-                Password = lvl1Passwords[Random.Range(0, lvl1Passwords.Length)];// TODO make random password later
+                Password = lvl1Passwords[Random.Range(0, lvl1Passwords.Length)];
                 break;
             case 2:
-                Password = lvl2Passwords[Random.Range(0, lvl2Passwords.Length)];// TODO make random password later
+                Password = lvl2Passwords[Random.Range(0, lvl2Passwords.Length)];
+                break;
+            case 3:
+                Password = lvl3Passwords[Random.Range(0, lvl3Passwords.Length)];
                 break;
             default:
                 Debug.LogError("I don't know you!");
@@ -156,6 +161,20 @@ public class Hacker : MonoBehaviour
 .＼　“　　／＿＿|   |
 　　＼ ／＿＿＿＿＿／
 "               );
+                break;
+            case 3:
+                Terminal.WriteLine(@"
+  .- -.         .- ---.
+ /     \ _____ /       \
+ \      `     `        /
+  `--/, '^^'. '^^',\--` 
+    || / ^\    / ^\ |\  -- Haha! You're gonna pay
+    |\ | ● | _ | ●| /|        for this!
+    \_\`~` .-.`~`/ _ /
+    /      '-'       \
+    \  `-, ..., -`  /
+      '-._ \^/ _.-'
+");
                 break;
             default:
                 Debug.LogError("I AM ERROR.");
