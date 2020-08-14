@@ -88,10 +88,10 @@ public class Hacker : MonoBehaviour
         switch (level)
         {
             case 1:
-                Password = lvl1Passwords[Random.Range(0, lvl1Passwords.Length); // TODO make random password later
+                Password = lvl1Passwords[Random.Range(0, lvl1Passwords.Length)];// TODO make random password later
                 break;
             case 2:
-                Password = lvl2Passwords[Random.Range(0, lvl2Passwords.Length); // TODO make random password later
+                Password = lvl2Passwords[Random.Range(0, lvl2Passwords.Length)];// TODO make random password later
                 break;
             default:
                 Debug.LogError("I don't know you!");
@@ -130,6 +130,29 @@ public class Hacker : MonoBehaviour
         {
             case 1:
                 Terminal.WriteLine("Have a book...");
+                Terminal.WriteLine(@"
+    _______
+   /      //
+  /  <3  //
+ /______// 
+(______(/
+"               );
+                break;
+            case 2:
+                Terminal.WriteLine(@"
+　 　　　＿＿＿_
+　　　／　　 　 　＼
+　 ／　  ──　  　── ＼   -- MHMM MHMM
+ ／ 　　 （ ●）  （ ●）＼      Good job!
+|　 　　 　 （__人__）  |
+./　　　　 ∩ノ ⊃　　 ／
+(　 ＼　／ ＿ノ |　 |
+.＼　“　　／＿＿|   |
+　　＼ ／＿＿＿＿＿／
+"               );
+                break;
+            default:
+                Debug.LogError("I AM ERROR.");
                 break;
         }
         
